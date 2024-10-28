@@ -66,7 +66,7 @@ classSelector: CLASS_IDENT;
 tagSelector: LOWER_IDENT;
 idSelector: ID_IDENT | COLOR;
 operator: PLUS | MIN | MUL | DIV | MOD;
-property: (ID_IDENT | CAPITAL_IDENT | LOWER_IDENT)+;
+property: LOWER_IDENT;
 
 literal: boolLiteral | colorLiteral | pixelLiteral | scalarLiteral | percentageLiteral| variableReference;
 variableReference: CAPITAL_IDENT;
