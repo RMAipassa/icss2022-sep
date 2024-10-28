@@ -108,7 +108,7 @@ public class ASTListener extends ICSSBaseListener {
 
     @Override
     public void enterClassSelector(ICSSParser.ClassSelectorContext ctx) {
-        ASTNode classSelector = new ClassSelector(ctx.getText().substring(1));
+        ASTNode classSelector = new ClassSelector(ctx.getText());
         currentContainer.push(classSelector);
     }
 
@@ -120,7 +120,7 @@ public class ASTListener extends ICSSBaseListener {
 
     @Override
     public void enterIdSelector(ICSSParser.IdSelectorContext ctx) {
-        ASTNode idSelector = new IdSelector(ctx.getText().substring(1));
+        ASTNode idSelector = new IdSelector(ctx.getText());
         currentContainer.push(idSelector);
     }
 

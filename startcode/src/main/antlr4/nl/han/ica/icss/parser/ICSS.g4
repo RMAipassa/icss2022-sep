@@ -49,15 +49,14 @@ COMMA: ',';
 
 //--- PARSER: ---
 stylesheet: variabledecleration* stylerule* EOF;
-stylerule: selector OPEN_BRACE (declaration | conditional_block | variabledecleration)* CLOSE_BRACE;
+stylerule: selector OPEN_BRACE (declaration | if_block | variabledecleration)* CLOSE_BRACE;
 
 declaration: property COLON expression+ SEMICOLON;
 variabledecleration: variableReference ASSIGNMENT_OPERATOR expression+ SEMICOLON;
 selector: (tagSelector | classSelector | idSelector) (COMMA selector)*;
 
-conditional_block: if_block else_block?;
-if_block: IF BOX_BRACKET_OPEN condition BOX_BRACKET_CLOSE OPEN_BRACE (declaration | variabledecleration| conditional_block)* CLOSE_BRACE;
-else_block: ELSE OPEN_BRACE (declaration | conditional_block)* CLOSE_BRACE;
+if_block: IF BOX_BRACKET_OPEN condition BOX_BRACKET_CLOSE OPEN_BRACE (declaration | variabledecleration| if_block)* CLOSE_BRACE else_block?;
+else_block: ELSE OPEN_BRACE (declaration | if_block)* CLOSE_BRACE;
 condition: variableReference| boolLiteral;
 
 
