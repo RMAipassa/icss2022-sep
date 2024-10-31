@@ -56,11 +56,11 @@ variabledecleration: variableReference ASSIGNMENT_OPERATOR expression+ SEMICOLON
 selector: (tagSelector | classSelector | idSelector) (COMMA selector)*;
 
 if_block: IF BOX_BRACKET_OPEN condition BOX_BRACKET_CLOSE OPEN_BRACE (declaration | variabledecleration| if_block)* CLOSE_BRACE else_block?;
-else_block: ELSE OPEN_BRACE (declaration | if_block)* CLOSE_BRACE;
+else_block: ELSE OPEN_BRACE (declaration | variabledecleration| if_block)* CLOSE_BRACE;
 condition: variableReference| boolLiteral;
 
 
-expression: literal| expression (MUL | DIV | MOD) expression | expression (PLUS | MIN) expression;
+expression: literal| expression (MUL | DIV) expression | expression (PLUS | MIN) expression;
 classSelector: CLASS_IDENT;
 tagSelector: LOWER_IDENT;
 idSelector: ID_IDENT | COLOR;
