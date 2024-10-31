@@ -60,7 +60,6 @@ public class Checker {
         }
     }
 
-    //TODO: Implement check for operanden CH02
     private void checkDeclaration(ASTNode node) {
         Declaration declaration = (Declaration) node;
         switch (declaration.property.name) {
