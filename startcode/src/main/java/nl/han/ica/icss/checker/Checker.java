@@ -57,9 +57,9 @@ public class Checker {
 
         for (ASTNode child : node.getChildren()) {
             if (child instanceof Declaration) {
-                checkDeclaration((Declaration) child);
+                checkDeclaration(child);
             } else if (child instanceof VariableAssignment) {
-                checkVariableAssignment((VariableAssignment) child);
+                checkVariableAssignment(child);
             } else if (child instanceof IfClause) {
                 checkIfClause(child);
             }
