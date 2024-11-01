@@ -24,14 +24,20 @@ public class Checker {
 
     private void checkstylesheet(ASTNode node) {
         Stylesheet stylesheet = (Stylesheet) node;
-        for (ASTNode child : node.getChildren()) {
+
+        variableTypes.addFirst(new HashMap<>());
+
+        for (ASTNode child : stylesheet.getChildren()) {
             if (child instanceof VariableAssignment) {
-                checkVariableAssignment((VariableAssignment) child);
+                checkVariableAssignment(child);
             }
             if (child instanceof Stylerule) {
-                checkStylerule((Stylerule) child);
+                variableTypes.addFirst(new HashMap<>());
+                checkStylerule(child);
+                variableTypes.removeFirst();
             }
         }
+        variableTypes.removeFirst();
     }
 
     private void checkVariableAssignment(ASTNode node) {
@@ -192,6 +198,7 @@ public class Checker {
 
     private void checkIfClause(ASTNode node) {
         IfClause ifClause = (IfClause) node;
+        variableTypes.addFirst(new HashMap<>());
         if(ifClause.conditionalExpression instanceof VariableReference){
             if(getType(((VariableReference) ifClause.conditionalExpression).name) != ExpressionType.BOOL){
                 ifClause.setError("ConditionalExpression should be a boolean literal.");
@@ -212,10 +219,11 @@ public class Checker {
                 checkIfClause(child);
             }
         }
+
         if(ifClause.elseClause != null){
             checkElseClause(ifClause.elseClause);
         }
-
+        variableTypes.removeFirst();
     }
 
     private void checkElseClause(ASTNode node) {
